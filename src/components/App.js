@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 
 // pull here message
-import Messages from "./Wall";
+import Messages from "./Wall/Messages";
 
 
 // prettier-ignore
