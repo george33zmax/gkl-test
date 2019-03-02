@@ -4,19 +4,27 @@ import "./App.css";
 import { connect } from "react-redux";
 
 
-// pull here message
-import Messages from "./Wall/Messages";
+import SidePanel from "./SidePanel/SidePanel";
+import Messages from "./Messages/Messages";
 import logo from '../logo.svg';
 
-// prettier-ignore
 const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primaryColor, secondaryColor }) => (
+
   <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
-    {/* wall */}
-    <Grid.Column >
-      <Messages />
+    <SidePanel
+      key={currentUser && currentUser.uid}
+      currentUser={currentUser}
+      primaryColor={primaryColor}
+    />
+
+    <Grid.Column style={{ marginLeft: 320 }}>
+      <Messages
+        key={currentChannel && currentChannel.id}
+        currentChannel={currentChannel}
+        currentUser={currentUser}
+      />
     </Grid.Column>
 
-    {/* Logo */}
     <Grid.Column width={4}>
       <img src={logo} alt=""/>
     </Grid.Column>
@@ -25,6 +33,11 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primary
 
 const mapStateToProps = state => ({
   currentUser: state.user.currentUser,
+  currentChannel: state.channel.currentChannel,
+  isPrivateChannel: state.channel.isPrivateChannel,
+  userPosts: state.channel.userPosts,
+  primaryColor: state.colors.primaryColor,
+  secondaryColor: state.colors.secondaryColor
 });
 
 export default connect(mapStateToProps)(App);

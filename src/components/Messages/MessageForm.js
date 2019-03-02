@@ -134,11 +134,7 @@ class MessageForm extends React.Component {
   };
 
   getPath = () => {
-    if (this.props.isPrivateChannel) {
-      return `chat/private/${this.state.channel.id}`;
-    } else {
-      return "chat/public";
-    }
+    return "chat/public";
   };
 
   uploadFile = (file, metadata) => {
@@ -205,7 +201,6 @@ class MessageForm extends React.Component {
   };
 
   render() {
-    // prettier-ignore
     const { errors, message, loading, modal, uploadState, percentUploaded, emojiPicker } = this.state;
 
     return (
@@ -229,7 +224,7 @@ class MessageForm extends React.Component {
           style={{ marginBottom: "0.7em" }}
           label={
             <Button
-              icon={emojiPicker ? "close" : "eye"}
+              icon={emojiPicker ? "close" : "add"}
               content={emojiPicker ? "Close" : null}
               onClick={this.handleTogglePicker}
             />
@@ -246,13 +241,13 @@ class MessageForm extends React.Component {
           <Button
             onClick={this.sendMessage}
             disabled={loading}
-            color="blue"
-            content="Reply"
+            color="orange"
+            content="Add Reply"
             labelPosition="left"
             icon="edit"
           />
           <Button
-            color="green"
+            color="teal"
             disabled={uploadState === "uploading"}
             onClick={this.openModal}
             content="Upload Media"

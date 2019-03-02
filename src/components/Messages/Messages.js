@@ -21,9 +21,6 @@ class Messages extends React.Component {
     user: this.props.currentUser,
     usersRef: firebase.database().ref("users"),
     numUniqueUsers: "",
-    searchTerm: "",
-    searchLoading: false,
-    searchResults: [],
     typingRef: firebase.database().ref("typing"),
     typingUsers: [],
     connectedRef: firebase.database().ref(".info/connected"),
@@ -150,7 +147,6 @@ class Messages extends React.Component {
     return privateChannel ? privateMessagesRef : messagesRef;
   };
 
-
   countUniqueUsers = messages => {
     const uniqueUsers = messages.reduce((acc, message) => {
       if (!acc.includes(message.user.name)) {
@@ -188,7 +184,6 @@ class Messages extends React.Component {
       />
     ));
 
-
   displayTypingUsers = users =>
     users.length > 0 &&
     users.map(user => (
@@ -210,17 +205,15 @@ class Messages extends React.Component {
     ) : null;
 
   render() {
-    // prettier-ignore
-    const { messagesRef, messages, channel, user, searchTerm, searchResults, typingUsers, messagesLoading } = this.state;
+    const { messagesRef, messages, channel, user, typingUsers, messagesLoading } = this.state;
 
     return (
       <React.Fragment>
+
         <Segment>
           <Comment.Group className="messages">
             {this.displayMessageSkeleton(messagesLoading)}
-            {searchTerm
-              ? this.displayMessages(searchResults)
-              : this.displayMessages(messages)}
+            {this.displayMessages(messages)}
             {this.displayTypingUsers(typingUsers)}
             <div ref={node => (this.messagesEnd = node)} />
           </Comment.Group>
