@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/react-slack-clone.iml" filepath="$PROJECT_DIR$/.idea/react-slack-clone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../gkl-jorge/.idea/gkl-jorge.iml" filepath="$PROJECT_DIR$/../gkl-jorge/.idea/gkl-jorge.iml" />
     </modules>
   </component>
 </project>
