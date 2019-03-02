@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 // pull here message
 import Messages from "./Wall/Messages";
-
+import logo from '../logo.svg';
 
 // prettier-ignore
 const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primaryColor, secondaryColor }) => (
@@ -18,7 +18,7 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primary
 
     {/* Logo */}
     <Grid.Column width={4}>
-      <div>aki logo</div>
+      <img src={logo} alt=""/>
     </Grid.Column>
   </Grid>
 );
