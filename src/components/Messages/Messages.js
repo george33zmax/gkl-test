@@ -11,7 +11,6 @@ import Skeleton from "./Skeleton";
 
 class Messages extends React.Component {
   state = {
-    privateChannel: this.props.isPrivateChannel,
     privateMessagesRef: firebase.database().ref("privateMessages"),
     messagesRef: firebase.database().ref("messages"),
     messages: [],
@@ -143,8 +142,8 @@ class Messages extends React.Component {
   };
 
   getMessagesRef = () => {
-    const { messagesRef, privateMessagesRef, privateChannel } = this.state;
-    return privateChannel ? privateMessagesRef : messagesRef;
+    const { messagesRef } = this.state;
+    return messagesRef;
   };
 
   countUniqueUsers = messages => {
