@@ -9,3 +9,5 @@ export const SET_USER_POSTS = "SET_USER_POSTS";
 
 /* Colors Action Types */
 export const SET_COLORS = "SET_COLORS";
+
+export const SET_QUERYID =  "SET_QUERYID";

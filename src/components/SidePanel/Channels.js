@@ -31,11 +31,29 @@ class Channels extends React.Component {
 
   addListeners = () => {
     let loadedChannels = [];
-    this.state.channelsRef.on("child_added", snap => {
-      loadedChannels.push(snap.val());
-      this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
-      this.addNotificationListener(snap.key);
+    let selectedChannel;
+    this.state.channelsRef.once("value", snapshot => {
+
+      let data = [];
+      snapshot.forEach(function(childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+
+        data.push(childData);
+      });
+
+      selectedChannel  = data[1]
+      console.log("aki selectedChannel", selectedChannel);
+      this.setState({activeChannel: selectedChannel});
+
+      this.state.channelsRef.on("child_added", snap => {
+        loadedChannels.push(snap.val());
+        this.setState({ channels: loadedChannels }, () => this.setFirstChannel(this.state.activeChannel));
+        this.addNotificationListener(snap.key);
+      });
     });
+
+
   };
 
   addNotificationListener = channelId => {
@@ -86,12 +104,13 @@ class Channels extends React.Component {
     });
   };
 
-  setFirstChannel = () => {
-    const firstChannel = this.state.channels[0];
+  setFirstChannel = (selectedChannel) => {
+
     if (this.state.firstLoad && this.state.channels.length > 0) {
-      this.props.setCurrentChannel(firstChannel);
-      this.setActiveChannel(firstChannel);
-      this.setState({ channel: firstChannel });
+      const firstChannel = this.state.channels[0];
+      this.props.setCurrentChannel(selectedChannel);
+      this.setActiveChannel(selectedChannel);
+      this.setState({ channel: selectedChannel });
     }
     this.setState({ firstLoad: false });
   };
@@ -117,7 +136,7 @@ class Channels extends React.Component {
       .then(() => {
         this.setState({ channelName: "", channelDetails: "" });
         this.closeModal();
-        console.log("channel added");
+        // console.log("channel added");
       })
       .catch(err => {
         console.error(err);
@@ -204,6 +223,10 @@ class Channels extends React.Component {
 
   render() {
     const { channels, modal } = this.state;
+
+    // console.log(this.props.queryId);
+    // console.log("aki active channel");
+    // console.log(this.state.activeChannel);
 
     return (
       <React.Fragment>

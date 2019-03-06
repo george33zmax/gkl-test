@@ -8,10 +8,11 @@ import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 import logo from '../logo.svg';
 
-const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primaryColor, secondaryColor }) => (
+const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primaryColor, secondaryColor, queryId }) => (
 
   <Grid columns="equal" className="app" style={{ background: secondaryColor }}>
     <SidePanel
+      queryId={queryId}
       key={currentUser && currentUser.uid}
       currentUser={currentUser}
       primaryColor={primaryColor}
@@ -32,6 +33,7 @@ const App = ({ currentUser, currentChannel, isPrivateChannel, userPosts, primary
 );
 
 const mapStateToProps = state => ({
+  queryId: state.queryId.queryId,
   currentUser: state.user.currentUser,
   currentChannel: state.channel.currentChannel,
   isPrivateChannel: state.channel.isPrivateChannel,

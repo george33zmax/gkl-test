@@ -68,7 +68,23 @@ const colors_reducer = (state = initialColorsState, action) => {
   }
 };
 
+const initialQueryState = {
+  queryId : "-L_8LBO2FeWsaAcuFQOz",
+};
+
+const query_reducer = (state = initialQueryState, action) => {
+  switch (action.type) {
+    case actionTypes.SET_QUERYID:
+      return {
+        queryId: state.queryId
+      };
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
+  queryId: query_reducer,
   user: user_reducer,
   channel: channel_reducer,
   colors: colors_reducer

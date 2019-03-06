@@ -43,3 +43,12 @@ export const setUserPosts = userPosts => {
     }
   };
 };
+
+export const setQueryPost = queryId => {
+  return {
+    type: actionTypes.SET_QUERYID,
+    payload: {
+      queryId
+    }
+  };
+};

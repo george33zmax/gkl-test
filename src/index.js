@@ -20,7 +20,7 @@ import { createStore } from "redux";
 import { Provider, connect } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers";
-import { setUser, clearUser } from "./actions";
+import { setUser, clearUser, setQueryPost, setCurrentChannel } from "./actions";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -29,8 +29,15 @@ class Root extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // console.log(user);
+        let  channelId = "-L_8LBO2FeWsaAcuFQOz";
+
+        // this.props.setCurrentChannel(channelId);
+
         this.props.setUser(user);
         this.props.history.push("/");
+
+
+
       } else {
         this.props.history.push("/login");
         this.props.clearUser();
@@ -58,7 +65,7 @@ const mapStateFromProps = state => ({
 const RootWithAuth = withRouter(
   connect(
     mapStateFromProps,
-    { setUser, clearUser }
+    { setUser, clearUser, setQueryPost, setCurrentChannel}
   )(Root)
 );
 

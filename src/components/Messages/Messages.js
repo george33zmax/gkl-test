@@ -30,6 +30,7 @@ class Messages extends React.Component {
     const { channel, user, listeners } = this.state;
 
     if (channel && user) {
+      console.log("Aki");
       this.removeListeners(listeners);
       this.addListeners(channel.id);
       this.addUserStarsListener(channel.id, user.uid);
@@ -37,6 +38,7 @@ class Messages extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log("aki unmount");
     this.removeListeners(this.state.listeners);
     this.state.connectedRef.off();
   }

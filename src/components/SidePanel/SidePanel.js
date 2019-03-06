@@ -6,7 +6,7 @@ import Channels from "./Channels";
 
 class SidePanel extends React.Component {
   render() {
-    const { currentUser, primaryColor } = this.props;
+    const { currentUser, primaryColor, queryId } = this.props;
 
     return (
       <Menu
@@ -17,7 +17,7 @@ class SidePanel extends React.Component {
         style={{ background: primaryColor, fontSize: "1.2rem" }}
       >
         <UserPanel primaryColor={primaryColor} currentUser={currentUser} />
-        <Channels currentUser={currentUser} />
+        <Channels queryId={queryId} currentUser={currentUser} />
       </Menu>
     );
   }
